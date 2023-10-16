@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-forms',
@@ -7,8 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormsComponent implements OnInit {
   results = [];
+  formGroup!: FormGroup;
+  // isto é um atributo e com a exclamação estou avisando que já farei a declaração dele
 
-  constructor() {}
+  constructor(private formBuilder: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.formGroup = this.formBuilder.group({
+      hour: '',
+      showClosed: false,
+    });
+  }
+
+  onSubmit(): void {
+    console.log(this.formGroup.value);
+  }
+
+  onClean(): void {
+    this.formGroup.reset();
+  }
 }
