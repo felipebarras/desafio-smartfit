@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FilterUnitsService } from 'src/app/services/filter-units.service';
 import { GetUnitsService } from 'src/app/services/get-available-units.service';
@@ -10,6 +10,8 @@ import { Location } from 'src/app/types/location.interface';
   styleUrls: ['./forms.component.scss'],
 })
 export class FormsComponent implements OnInit {
+  // precisamos emitir um evento que irá passar pro cardList retornar a informação de cada unidade lá pro app component
+  @Output() submitEvent = new EventEmitter();
   results: Location[] = [];
   filteredResults: Location[] = []; // resultados filtrados na busca do formulário
   formGroup!: FormGroup;
@@ -41,6 +43,9 @@ export class FormsComponent implements OnInit {
       hour
     );
     this.unitService.setFilteredUnits(this.filteredResults);
+
+    // esse evento irá refletir no app component
+    this.submitEvent.emit();
   }
 
   onClean(): void {

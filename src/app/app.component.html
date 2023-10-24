@@ -1,4 +1,11 @@
 <div class="app-container">
   <app-header></app-header>
-  <app-forms></app-forms>
+  <!-- precisa ser com parentesis por ser um método que estamos importando aqui -->
+  <app-forms (submitEvent)="onSubmit()"></app-forms>
+  <!-- o pipe async é para indicar a ler os eventos de maneira assíncrona, aguardando assim suas mudanças -->
+  <app-cards-list
+    *ngIf="showList | async"
+    [unitsList]="unitsList"
+  ></app-cards-list>
+  <!-- para chamar o async, precisamos importar o CommonModule lá no app.module.ts -->
 </div>
