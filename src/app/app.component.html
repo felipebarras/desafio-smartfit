@@ -2,6 +2,7 @@
   <app-header></app-header>
   <!-- precisa ser com parentesis por ser um método que estamos importando aqui -->
   <app-forms (submitEvent)="onSubmit()"></app-forms>
+  <app-subtitle></app-subtitle>
   <!-- o pipe async é para indicar a ler os eventos de maneira assíncrona, aguardando assim suas mudanças -->
   <app-cards-list
     *ngIf="showList | async"
